@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.chart-container #chartdiv {
+  width: 100%;
+  height: 500px;
+}

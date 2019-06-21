@@ -7,9 +7,18 @@ class XYChart1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+  
+  componentDidMount() {
+    const chart = am4core.create('chartdiv', am4charts.XYChart);
+    chart.data = this.props.data;
 
-    this.chart = am4core.create("chartdiv", am4charts.XYChart);
-    this.chart.data = this.props.data;
+    const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = 'Team name';
+    categoryAxis.title.text = 'Teams';
+
+    const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Task Quantity";
   }
   
   render() {
