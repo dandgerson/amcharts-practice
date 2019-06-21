@@ -1,4 +1,4 @@
-[
+export default [
   {"Issue status":"In progress","Team name":"A","Issue ID":"A-1"},
   {"Issue status":"Done","Team name":"A","Issue ID":"A-2"},
   {"Issue status":"Open","Team name":"A","Issue ID":"A-3"},
@@ -32,4 +32,4 @@
   {"Issue status":"Done","Team name":"C","Issue ID":"C-12"},
   {"Issue status":"Done","Team name":"C","Issue ID":"C-13"},
   {"Issue status":"Done","Team name":"C","Issue ID":"C-14"}
-]
+];
