@@ -28,21 +28,29 @@ class XYChart1 extends React.Component {
     valueAxis.title.text =  'Task Quantity';
     
     // Create series
-    const series = chart.series.push(new am4charts.ColumnSeries());
-    series.name =  'Team names ';
-    series.dataFields.valueY =  'Issue ID';
-    series.dataFields.categoryX =  'Team name';
-    series.tooltipText = '{name}: [bold]{valueY}[/]';
-    series.stacked = true;
+    const series1 = chart.series.push(new am4charts.ColumnSeries());
+    series1.name =  'Open';
+    series1.dataFields.valueY =  'Issue ID';
+    series1.dataFields.categoryX =  'Team name';
+    series1.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
+    series1.stacked = true;
     
     const series2 = chart.series.push(new am4charts.ColumnSeries());
-    series2.name = 'Status';
-    series2.dataFields.valueY = 'Issue status';
+    series2.name = 'In progress';
+    series2.dataFields.valueY = 'Issue ID';
     series2.dataFields.categoryX = 'Team name';
-    series2.tooltipText = '{name}: [bold]{valueY}[/]';
+    series2.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
     series2.stacked = true;
 
+    const series3 = chart.series.push(new am4charts.ColumnSeries());
+    series3.name = 'Done';
+    series3.dataFields.valueY = 'Issue ID';
+    series3.dataFields.categoryX = 'Team name';
+    series3.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
+    series3.stacked = true;
+
     chart.cursor = new am4charts.XYCursor();
+    chart.legeng = new am4charts.Legend();
 
     this.chart = chart;
   }

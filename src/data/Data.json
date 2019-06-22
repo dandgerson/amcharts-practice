@@ -24,14 +24,46 @@
     "Team name":"A",
     "Issue ID":"A 5"
   },
-  {"Issue status":"Open","Team name":"A","Issue ID":"A 6"},
-  {"Issue status":"Open","Team name":"A","Issue ID":"A 7"},
-  {"Issue status":"Done","Team name":"A","Issue ID":"A 8"},
-  {"Issue status":"In progress","Team name":"A","Issue ID":"A 9"},
-  {"Issue status":"Open","Team name":"A","Issue ID":"A 10"},
-  {"Issue status":"In progress","Team name":"A","Issue ID":"A 11"},
-  {"Issue status":"Done","Team name":"A","Issue ID":"A 12"},
-  {"Issue status":"Done","Team name":"A","Issue ID":"A 13"},
+  {
+    "Issue status":"Open",
+    "Team name":"A",
+    "Issue ID":"A 6"
+  },
+  {
+    "Issue status":"Open",
+    "Team name":"A",
+    "Issue ID":"A 7"
+  },
+  {
+    "Issue status":"Done",
+    "Team name":"A",
+    "Issue ID":"A 8"
+  },
+  {
+    "Issue status":"In progress",
+    "Team name":"A",
+    "Issue ID":"A 9"
+  },
+  {
+    "Issue status":"Open",
+    "Team name":"A",
+    "Issue ID":"A 10"
+  },
+  {
+    "Issue status":"In progress",
+    "Team name":"A",
+    "Issue ID":"A 11"
+  },
+  {
+    "Issue status":"Done",
+    "Team name":"A",
+    "Issue ID":"A 12"
+  },
+  {
+    "Issue status":"Done",
+    "Team name":"A",
+    "Issue ID":"A 13"
+  },
   {"Issue status":"In progress","Team name":"B","Issue ID":"B 1"},
   {"Issue status":"Open","Team name":"B","Issue ID":"B 2"},
   {"Issue status":"Open","Team name":"B","Issue ID":"B 3"},
