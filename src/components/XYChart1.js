@@ -6,21 +6,23 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
 
 class XYChart1 extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   
   componentDidMount() {
     am4core.useTheme(am4themes_animated);
     am4core.useTheme(am4themes_kelly);
+
+    const colors = {
+      done: '#FFBF00',
+      inProgress: '#A5A5A5',
+      open: '#ED7D31',
+    };
 
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = this.props.data;
 
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'Team name';
-    categoryAxis.title.text = 'Team names';
+    categoryAxis.title.text = 'Teams';
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.renderer.minGridDistance = 20;
     
@@ -29,10 +31,11 @@ class XYChart1 extends React.Component {
     
     // Create series
     const series1 = chart.series.push(new am4charts.ColumnSeries());
-    series1.name =  'Open';
+    series1.name =  'Done';
     series1.dataFields.valueY =  'Issue ID';
     series1.dataFields.categoryX =  'Team name';
     series1.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
+    series1.columns.template.fill = am4core.color(colors.done);
     series1.stacked = true;
     
     const series2 = chart.series.push(new am4charts.ColumnSeries());
@@ -43,7 +46,7 @@ class XYChart1 extends React.Component {
     series2.stacked = true;
 
     const series3 = chart.series.push(new am4charts.ColumnSeries());
-    series3.name = 'Done';
+    series3.name = 'Open';
     series3.dataFields.valueY = 'Issue ID';
     series3.dataFields.categoryX = 'Team name';
     series3.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
