@@ -6,14 +6,14 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 // import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
 
 class XYChart1 extends React.Component {
-  createSeries({ chart, field, name, colors, stacked }) {
+  createSeries({ chart, field, name, colors }) {
     const series = chart.series.push(new am4charts.ColumnSeries());
     series.name = name;
     series.dataFields.valueY = field;
     series.dataFields.categoryX = 'Team name';
     series.sequencedInterpolation = true;
     series.columns.template.fill = am4core.color(colors[name]);
-    series.stacked = stacked;
+    series.stacked = true;
 
     series.columns.template.width = am4core.percent(40);
     series.columns.template.tooltipText = '[bold]{name}[/]\n[font-size: 14px]{categoryX}: {valueY}';
@@ -56,28 +56,23 @@ class XYChart1 extends React.Component {
       'Open': '#ED7D31',
     };
 
-    const stacked = true;
-
     this.createSeries({
       chart,
       name: 'Done',
       field: 'Issue ID',
       colors,
-      stacked,
     });
     this.createSeries({
       chart,
       name: 'In progress',
       field: 'Issue ID',
       colors,
-      stacked,
     });
     this.createSeries({
       chart,
       name: 'Open',
       field: 'Issue ID',
       colors,
-      stacked,
     });
 
     const totalSeries = chart.series.push(new am4charts.ColumnSeries());
