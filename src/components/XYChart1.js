@@ -6,7 +6,25 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
 
 class XYChart1 extends React.Component {
+  createSeries({ chart, field, name, colors, stacked }) {
+    let series = chart.series.push(new am4charts.ColumnSeries());
+    series.name = name;
+    series.dataFields.valueY = field;
+    series.dataFields.categoryX = 'Team name';
+    series.sequencedInterpolation = true;
+    series.columns.template.fill = am4core.color(colors[name]);
+    series.stacked = stacked;
 
+    series.columns.template.width = am4core.percent(40);
+    series.columns.template.tooltipText = '[bold]{name}[/]\n[font-size: 14px]{categoryX}: {valueY}';
+    
+    let labelBullet = series.bullets.push(new am4charts.LabelBullet());
+    labelBullet.label.text = '{valueY}';
+    labelBullet.locationY = 0.5;
+    
+    return series;
+  }
+  
   formatData(data) {
     return  data.flat();
   }
@@ -15,53 +33,47 @@ class XYChart1 extends React.Component {
     am4core.useTheme(am4themes_animated);
     am4core.useTheme(am4themes_kelly);
 
-    const options = {
-      colors: {
-        done: '#FFBF00',
-        inProgress: '#A5A5A5',
-        open: '#ED7D31',
-      },
-      stacked: true,
-    };
-
-    options.stacked = false;
-
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = this.formatData(this.props.data);
 
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'Team name';
     categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 20;
     
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    
-    // Create series
-    const series1 = chart.series.push(new am4charts.ColumnSeries());
-    series1.name = 'Done';
-    series1.dataFields.categoryX = 'Team name';
-    series1.dataFields.valueY = 'Issue ID';
-    series1.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
-    series1.columns.template.fill = am4core.color(options.colors.done);
-    series1.stacked = options.stacked;
-    
-    const series2 = chart.series.push(new am4charts.ColumnSeries());
-    series2.name = 'In progress';
-    series2.dataFields.categoryX = 'Team name';
-    series2.dataFields.valueY = 'Issue ID';
-    series2.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
-    series2.columns.template.fill = am4core.color(options.colors.inProgress);
-    series2.stacked = options.stacked;
-    
-    const series3 = chart.series.push(new am4charts.ColumnSeries());
-    series3.name = 'Open';
-    series3.dataFields.categoryX = 'Team name';
-    series3.dataFields.valueY = 'Issue ID';
-    series3.columns.template.tooltipText = '{name}: [bold]{valueY}[/]';
-    series3.columns.template.fill = am4core.color(options.colors.open);
-    series3.stacked = options.stacked;
+    valueAxis.min = 0;
 
-    chart.cursor = new am4charts.XYCursor();
+
+    // Create series
+    const colors = {
+      'Done': '#FFBF00',
+      'In progress': '#A5A5A5',
+      'Open': '#ED7D31',
+    };
+
+    this.createSeries({
+      chart,
+      name: 'Done',
+      field: 'Issue ID',
+      colors,
+      // stacked: true,
+    });
+    this.createSeries({
+      chart,
+      name: 'In progress',
+      field: 'Issue ID',
+      colors,
+      // stacked: true,
+    });
+    this.createSeries({
+      chart,
+      name: 'Open',
+      field: 'Issue ID',
+      colors,
+      // stacked: true,
+    });
+
+    // chart.cursor = new am4charts.XYCursor();
     chart.legend = new am4charts.Legend();
 
     this.chart = chart;
