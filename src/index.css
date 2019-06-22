@@ -18,7 +18,7 @@ code {
   justify-content: center;
 }
 
-#chartdiv {
+.chart {
   width: 600px;
   height: 350px;
 }

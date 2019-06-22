@@ -2,93 +2,101 @@ import React from 'react';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
-// import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-// import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
 
-class XYChart1 extends React.Component {
-  createSeries({ chart, field, name, colors, stacked }) {
+class XYChart2 extends React.Component {
+  createSeries({ chart, field, name, stacked }) {
     const series = chart.series.push(new am4charts.ColumnSeries());
     series.name = name;
     series.dataFields.valueY = field;
-    series.dataFields.categoryX = 'Team name';
+    series.dataFields.categoryX = 'year';
     series.sequencedInterpolation = true;
-    series.columns.template.fill = am4core.color(colors[name]);
+
     series.stacked = stacked;
 
-    series.columns.template.width = am4core.percent(40);
+    series.columns.template.width = am4core.percent(60);
     series.columns.template.tooltipText = '[bold]{name}[/]\n[font-size: 14px]{categoryX}: {valueY}';
     
     const labelBullet = series.bullets.push(new am4charts.LabelBullet());
     labelBullet.label.text = '{valueY}';
-    labelBullet.locationY = 0.06;
+    labelBullet.label.fill = am4core.color('#fff');
+    labelBullet.locationY = 0.5;
     
     return series;
   }
   
-  formatData(data) {
-
-    return  data.flat();
-  }
-
   componentDidMount() {
-    // am4core.useTheme(am4themes_animated);
-    // am4core.useTheme(am4themes_kelly);
+    am4core.useTheme(am4themes_animated);
+    am4core.useTheme(am4themes_dataviz);
 
-    const chart = am4core.create('chartdiv1', am4charts.XYChart);
+    const chart = am4core.create('chartdiv2', am4charts.XYChart);
     chart.maskBullets = false;
     chart.numberFormatter.numberFormat = "#.#";
-    chart.data = this.formatData(this.props.data);
+    chart.data = this.props.data;
 
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = 'Team name';
+    categoryAxis.dataFields.category = 'year';
     categoryAxis.renderer.grid.template.location = 0;
     
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.renderer.inside = true;
+    valueAxis.renderer.labels.template.disabled = true;
     valueAxis.min = 0;
     valueAxis.extraMax = 0.1;
     valueAxis.calculateTotals = true;
 
 
     // Create series
-    const colors = {
-      'Done': '#FFBF00',
-      'In progress': '#A5A5A5',
-      'Open': '#ED7D31',
-    };
 
     const stacked = true;
 
     this.createSeries({
       chart,
-      name: 'Done',
-      field: 'Issue ID',
-      colors,
+      name: 'Europe',
+      field: 'europe',
       stacked,
     });
     this.createSeries({
       chart,
-      name: 'In progress',
-      field: 'Issue ID',
-      colors,
+      name: 'North America',
+      field: 'namerica',
       stacked,
     });
     this.createSeries({
       chart,
-      name: 'Open',
-      field: 'Issue ID',
-      colors,
+      name: 'Asia-Pacific',
+      field: 'asia',
+      stacked,
+    });
+    this.createSeries({
+      chart,
+      name: 'Latin America',
+      field: 'lamerica',
+      stacked,
+    });
+    this.createSeries({
+      chart,
+      name: 'Middle-East',
+      field: 'meast',
+      stacked,
+    });
+    this.createSeries({
+      chart,
+      name: 'Africa',
+      field: 'africa',
       stacked,
     });
 
     const totalSeries = chart.series.push(new am4charts.ColumnSeries());
     totalSeries.dataFields.valueY = 'none';
-    totalSeries.dataFields.categoryX = 'Team name';
+    totalSeries.dataFields.categoryX = 'year';
     totalSeries.stacked = true;
     totalSeries.hiddenInLegend = true;
     totalSeries.columns.template.strokeOpacity = 0;
 
     const totalBullet = totalSeries.bullets.push(new am4charts.LabelBullet());
-    totalBullet.dy = 0;
+    totalBullet.dy = -20;
     totalBullet.label.text = '{valueY.total}';
     totalBullet.label.hideOversized = false;
     totalBullet.label.fontSize = 18;
@@ -109,10 +117,10 @@ class XYChart1 extends React.Component {
   render() {
     return (
       <div className= 'chart-container'>
-        <div id='chartdiv1' className="chart"></div>
+        <div id= 'chartdiv2' className="chart"></div>
       </div>
     );
   }
 }
 
-export default XYChart1;
+export default XYChart2;
