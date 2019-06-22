@@ -2,8 +2,8 @@ import React from 'react';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
+// import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+// import am4themes_kelly from '@amcharts/amcharts4/themes/kelly';
 
 class XYChart1 extends React.Component {
   createSeries({ chart, field, name, colors, stacked }) {
@@ -30,8 +30,8 @@ class XYChart1 extends React.Component {
   }
 
   componentDidMount() {
-    am4core.useTheme(am4themes_animated);
-    am4core.useTheme(am4themes_kelly);
+    // am4core.useTheme(am4themes_animated);
+    // am4core.useTheme(am4themes_kelly);
 
     const chart = am4core.create('chartdiv', am4charts.XYChart);
     chart.data = this.formatData(this.props.data);
@@ -51,26 +51,28 @@ class XYChart1 extends React.Component {
       'Open': '#ED7D31',
     };
 
+    const stacked = false;
+
     this.createSeries({
       chart,
       name: 'Done',
       field: 'Issue ID',
       colors,
-      // stacked: true,
+      stacked,
     });
     this.createSeries({
       chart,
       name: 'In progress',
       field: 'Issue ID',
       colors,
-      // stacked: true,
+      stacked,
     });
     this.createSeries({
       chart,
       name: 'Open',
       field: 'Issue ID',
       colors,
-      // stacked: true,
+      stacked,
     });
 
     // chart.cursor = new am4charts.XYCursor();
