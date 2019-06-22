@@ -12,7 +12,13 @@ code {
     monospace;
 }
 
-.chart-container #chartdiv {
-  width: 100%;
-  height: 300px;
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chartdiv {
+  width: 600px;
+  height: 350px;
 }
