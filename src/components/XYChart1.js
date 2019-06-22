@@ -50,7 +50,7 @@ class XYChart1 extends React.Component {
     series3.stacked = true;
 
     chart.cursor = new am4charts.XYCursor();
-    chart.legeng = new am4charts.Legend();
+    chart.legend = new am4charts.Legend();
 
     this.chart = chart;
   }
