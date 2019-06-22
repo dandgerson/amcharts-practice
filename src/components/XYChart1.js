@@ -19,6 +19,10 @@ class XYChart1 extends React.Component {
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.title.text = "Task Quantity";
+
+    const series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "Issue ID";
+    series.dataFields.categoryX = "Team name";
   }
   
   render() {

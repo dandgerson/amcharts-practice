@@ -1,8 +1,8 @@
 import React from 'react';
 
-import XYChart1 from './components/XYChart1';
+import data from './data/Data.json';
 
-import data from './data/Data';
+import XYChart1 from './components/XYChart1';
 
 class App extends React.Component {  
   render() {
