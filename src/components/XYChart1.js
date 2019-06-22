@@ -25,7 +25,7 @@ class XYChart1 extends React.Component {
     categoryAxis.renderer.minGridDistance = 20;
     
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text =  'Task Quantity';
+    valueAxis.title.text = 'Task Quantity';
     
     // Create series
     const series1 = chart.series.push(new am4charts.ColumnSeries());
