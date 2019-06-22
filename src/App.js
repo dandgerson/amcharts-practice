@@ -1,5 +1,6 @@
 import React from 'react';
 
+// import data from './data/qData.js';
 import data from './data/Data.json';
 
 import XYChart1 from './components/XYChart1';
