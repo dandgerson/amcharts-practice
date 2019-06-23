@@ -86,7 +86,7 @@ class XYChart4 extends React.Component {
     this.chart = chart;
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     this.chart && this.chart.dispose();
   }
   

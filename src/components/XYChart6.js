@@ -29,11 +29,18 @@ class XYChart6 extends React.Component {
     series.dataFields.valueY = field;
     series.dataFields.categoryX = 'Team name';
 
+    series.sequencedInterpolation = true;
+
     series.stacked = stacked;
 
     series.columns.template.width = am4core.percent(50);
     series.columns.template.tooltipText = '{name}: [bold]{valueY.value}[/]';
     series.columns.template.fill = am4core.color(colors[name]);
+
+    const labelBullet = series.bullets.push(new am4charts.LabelBullet());
+    labelBullet.label.text = '{valueY}';
+    labelBullet.label.fill = am4core.color('#000');
+    labelBullet.locationY = 0.5;
     
     series.columns.template.column.adapter.add(
       'cornerRadiusTopLeft',
@@ -60,44 +67,51 @@ class XYChart6 extends React.Component {
     const chart = am4core.create('chartdiv6', am4charts.XYChart);
     chart.data = this.props.data;
 
+    chart.maskBullets = false;
+    chart.numberFormatter.numberFormat = '#.#';
+
+
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'Team name';
     categoryAxis.renderer.grid.template.location = 0;
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.min = 0;
+ 
     valueAxis.renderer.minWidth = 35;
+ 
+    valueAxis.min = 0;
+    valueAxis.extraMax = 0.1;
+    valueAxis.calculateTotals = true;
 
-    chart.cursor = new am4charts.XYCursor();
+  
 
-    chart.legend = new am4charts.Legend();
+  
 
     // Create series
 
     this.createSeries({
       chart,
       colors,
-      field: 'Issue ID',
+      field: 'Done',
       name: 'Done',
       stacked: true,
     });
     this.createSeries({
       chart,
       colors,
-      field: 'Issue ID',
+      field: 'In progress',
       name: 'In progress',
       stacked: true,
     });
     this.createSeries({
       chart,
       colors,
-      field: 'Issue ID',
+      field: 'Open',
       name: 'Open',
       stacked: true,
     });
 
     // TODO show total
-
     const totalSeries = chart.series.push(new am4charts.ColumnSeries());
     totalSeries.dataFields.valueY = 'none';
     totalSeries.dataFields.categoryX = 'Team name';
@@ -106,7 +120,7 @@ class XYChart6 extends React.Component {
     totalSeries.columns.template.strokeOpacity = 0;
 
     const totalBullet = totalSeries.bullets.push(new am4charts.LabelBullet());
-    totalBullet.dy = 0;
+    totalBullet.dy = -20;
     totalBullet.label.text = '{valueY.total}';
     totalBullet.label.hideOversized = false;
     totalBullet.label.fontSize = 18;
@@ -114,10 +128,14 @@ class XYChart6 extends React.Component {
     totalBullet.label.background.fillOpacity = 0.2;
     totalBullet.label.padding(5, 10, 5, 10);
 
+    chart.cursor = new am4charts.XYCursor();
+
+    chart.legend = new am4charts.Legend();
+
     this.chart = chart;
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     this.chart && this.chart.dispose();
   }
   

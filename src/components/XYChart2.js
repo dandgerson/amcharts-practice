@@ -8,9 +8,11 @@ import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
 class XYChart2 extends React.Component {
   createSeries({ chart, field, name, stacked }) {
     const series = chart.series.push(new am4charts.ColumnSeries());
+
     series.name = name;
     series.dataFields.valueY = field;
     series.dataFields.categoryX = 'year';
+
     series.sequencedInterpolation = true;
 
     series.stacked = stacked;
