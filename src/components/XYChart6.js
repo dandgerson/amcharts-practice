@@ -3,9 +3,6 @@ import React from 'react';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-// import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
-
-// Using adapters to modify legend item appearance
 
 class XYChart6 extends React.Component {
   seriesCornerRadiusAdapter(chart, raduis, item) {
@@ -39,7 +36,6 @@ class XYChart6 extends React.Component {
 
     const labelBullet = series.bullets.push(new am4charts.LabelBullet());
     labelBullet.label.text = '{valueY}';
-    labelBullet.label.fill = am4core.color('#000');
     labelBullet.locationY = 0.5;
     
     series.columns.template.column.adapter.add(
@@ -56,7 +52,6 @@ class XYChart6 extends React.Component {
 
   componentDidMount() {
     am4core.useTheme(am4themes_animated);
-    // am4core.useTheme(am4themes_dataviz);
 
     const colors = {
       'Done': '#FFBF00',
@@ -70,7 +65,6 @@ class XYChart6 extends React.Component {
     chart.maskBullets = false;
     chart.numberFormatter.numberFormat = '#.#';
 
-
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'Team name';
     categoryAxis.renderer.grid.template.location = 0;
@@ -83,12 +77,7 @@ class XYChart6 extends React.Component {
     valueAxis.extraMax = 0.1;
     valueAxis.calculateTotals = true;
 
-  
-
-  
-
     // Create series
-
     this.createSeries({
       chart,
       colors,
@@ -111,7 +100,6 @@ class XYChart6 extends React.Component {
       stacked: true,
     });
 
-    // TODO show total
     const totalSeries = chart.series.push(new am4charts.ColumnSeries());
     totalSeries.dataFields.valueY = 'none';
     totalSeries.dataFields.categoryX = 'Team name';
@@ -123,12 +111,9 @@ class XYChart6 extends React.Component {
     totalBullet.dy = -20;
     totalBullet.label.text = '{valueY.total}';
     totalBullet.label.hideOversized = false;
-    totalBullet.label.fontSize = 18;
-    totalBullet.label.background.fill = totalSeries.stroke;
+    totalBullet.label.fontWeight = 'bold';
     totalBullet.label.background.fillOpacity = 0.2;
     totalBullet.label.padding(5, 10, 5, 10);
-
-    chart.cursor = new am4charts.XYCursor();
 
     chart.legend = new am4charts.Legend();
 
