@@ -1,12 +1,12 @@
 import React from 'react';
 
-import XYChart from './components/XYChart3';
-import data from './components/XYChart3/data'
+import Chart from './components/XYChart7';
+import data from './components/XYChart7/data'
 class App extends React.Component {
   render() {
     return (
       <div className="charts-container">
-        <XYChart data={data} className="chart"/>
+        <Chart data={data} className="chart"/>
       </div>
     );
   }
